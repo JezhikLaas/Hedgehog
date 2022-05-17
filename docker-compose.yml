@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq-hh
+    expose:
+      - 5672
+      - 15672
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  persistence:
+    build:
+      context: .
+      dockerfile: Hedgehog.Persistence/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

@@ -10,6 +10,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedgehog.DTOs", "Hedgehog.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedgehog.UI", "Hedgehog.UI\Hedgehog.UI.csproj", "{112287D8-71D1-4B38-8556-5F8C48FE2648}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{C1D912E7-B3BA-4F1A-A5F7-AD7A60377358}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedgehog.UnitTests", "Hedgehog.UnitTests\Hedgehog.UnitTests.csproj", "{4641D71A-3617-4FBC-A082-463A100FD196}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +44,9 @@ Global
 		{112287D8-71D1-4B38-8556-5F8C48FE2648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{112287D8-71D1-4B38-8556-5F8C48FE2648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{112287D8-71D1-4B38-8556-5F8C48FE2648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4641D71A-3617-4FBC-A082-463A100FD196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4641D71A-3617-4FBC-A082-463A100FD196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4641D71A-3617-4FBC-A082-463A100FD196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4641D71A-3617-4FBC-A082-463A100FD196}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
