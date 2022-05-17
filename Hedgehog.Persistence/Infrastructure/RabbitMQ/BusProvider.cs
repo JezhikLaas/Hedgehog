@@ -4,7 +4,7 @@ namespace Hedgehog.Persistence.Infrastructure.RabbitMQ;
 
 public class BusProvider : IDisposable, IBusProvider
 {
-    private const string ConnectionDescriptor = @"host=rabbit;
+    private const string ConnectionDescriptor = @"host=rabbitmq;
 username=guest;
 password=guest;
 publisherConfirms=true;

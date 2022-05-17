@@ -17,3 +17,5 @@ services:
       dockerfile: Hedgehog.Persistence/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - LOG_NAME=Persistence
+    entrypoint: ["./wait-for-it.sh", "rabbitmq:5672", "--", "./Hedgehog.Persistence"]

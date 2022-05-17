@@ -14,9 +14,15 @@ RUN dotnet publish -c release -o /app -r linux-musl-x64 --no-restore --self-cont
 FROM mcr.microsoft.com/dotnet/aspnet:6.0.5-alpine3.15
 
 RUN apk add --no-cache icu-libs
+RUN apk add --no-cache bash
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 WORKDIR /app
 COPY --from=build /app ./
+
+COPY wait-for-it.sh .
+RUN chmod +x wait-for-it.sh
+
+COPY nlog.config .
 
 ENTRYPOINT ["./Hedgehog.Persistence"]
