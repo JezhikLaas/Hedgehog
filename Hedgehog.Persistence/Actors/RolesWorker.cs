@@ -33,6 +33,15 @@ public class RolesWorker : BackgroundService
     internal async Task<RoleResponse> CreateRole(CreateRoleRequest request, CancellationToken stoppingToken)
     {
         var role = _mapper.Map<Role>(request);
+        var validation = await RoleValidator.Instance.ValidateAsync(role, stoppingToken);
+
+        if (validation.IsValid == false)
+        {
+            return new RoleResponse
+            {
+                Error = validation.ToString(";")
+            };
+        }
         
         using var session = _storeProvider.Store.OpenAsyncSession();
         await session.StoreAsync(role, stoppingToken);
