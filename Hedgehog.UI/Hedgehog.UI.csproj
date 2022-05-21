@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Radzen.Blazor" Version="3.18.8" />
+      <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
+      <PackageReference Include="Radzen.Blazor" Version="3.18.10" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,6 +18,17 @@
       <AdditionalFiles Include="Infrastructure\Pages\_Layout.cshtml" />
       <AdditionalFiles Include="Infrastructure\Shared\MainLayout.razor" />
       <AdditionalFiles Include="Infrastructure\Shared\NavMenu.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Hedgehog.Infrastructure\Hedgehog.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\nlog.config">
+        <Link>nlog.config</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

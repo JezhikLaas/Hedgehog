@@ -1,34 +1,29 @@
-using Hedgehog.UI.Infrastructure.Shared;
-using Radzen;
+using Hedgehog.Infrastructure;
+using Hedgehog.UI;
+using NLog.Web;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = Host.CreateDefaultBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages(options => options.RootDirectory = "/Infrastructure/Pages");
-builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<ThemeService>();
-builder.Services.AddScoped<ContextMenuService>();
-builder.Services.AddScoped<DialogService>();
-builder.Services.AddScoped<NotificationService>();
-builder.Services.AddScoped<TooltipService>();
+builder.ConfigureAppConfiguration((_, configuration) =>
+{
+    configuration.AddJsonFile("appsettings.json", false)
+        .AddJsonFile(
+            $"appsettings.{Ambience.Name}.json",
+            true
+        )
+        .AddEnvironmentVariables()
+        .AddKeyPerFile("/run/secrets", true);
+})
+.ConfigureWebHostDefaults(webBuilder =>
+{
+    webBuilder.UseStartup<Startup>();
+})
+.ConfigureLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.SetMinimumLevel(LogLevel.Trace);
+})
+.UseNLog();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
-
 app.Run();
