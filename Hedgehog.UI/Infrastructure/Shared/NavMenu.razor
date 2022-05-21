@@ -1,0 +1,16 @@
+﻿<RadzenSidebar @bind-Expanded="@SidebarExpanded">
+    <ChildContent>
+
+        <RadzenPanelMenu Style="width:300px">
+            <RadzenPanelMenuItem Text="Tickets" Icon="home" >
+                <RadzenPanelMenuItem Icon="account_circle" />
+            </RadzenPanelMenuItem>
+        </RadzenPanelMenu>
+
+    </ChildContent>
+</RadzenSidebar>
+
+@code {
+    [CascadingParameter(Name = nameof(SidebarExpanded))]
+    private bool SidebarExpanded { get; set; }
+}

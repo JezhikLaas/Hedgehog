@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+
+@inject ThemeService ThemeService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Hedgehog.UI</PageTitle>
+<RadzenLayout>
+    <RadzenHeader>
+        <ChildContent>
+            <div class="row justify-content-start align-items-center">
+                <div class="col-5 d-flex align-items-center">
+                    <RadzenSidebarToggle Click="@(_ => { SidebarExpanded = !SidebarExpanded; BodyExpanded = !BodyExpanded; })">
+                    </RadzenSidebarToggle>
+                    <RadzenLabel Text="Hedgehog">
+                    </RadzenLabel>
+                </div>
+                <div class="col-7 d-flex align-items-center justify-content-end">
+                    <RadzenDropDown class="mx-0 mx-lg-3" TValue="string" TextProperty="Text" ValueProperty="Value" Data="@ThemeService.Themes" Value="@ThemeService.CurrentTheme" Change="@ChangeTheme" />
+                </div>
+            </div>
+        </ChildContent>
+    </RadzenHeader>
+    
+    <RadzenBody @bind-Expanded="@BodyExpanded">
+        <ChildContent>
+            <RadzenContentContainer Name="main">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 pt-4 pb-5 px-3 px-lg-5">
+                            @Body
+                        </div>
+                    </div>
+                </div>
+            </RadzenContentContainer>
+        </ChildContent>
+    </RadzenBody>
+    
+    <CascadingValue Name="@nameof(SidebarExpanded)" Value="@SidebarExpanded">
+        <NavMenu/>
+    </CascadingValue>
+</RadzenLayout>
+
+@code
+{
+    private bool SidebarExpanded { get; set; } = true;
+    
+    private bool BodyExpanded { get; set; }
+    
+    protected override void OnInitialized()
+    {
+        ThemeService.Initialize(NavigationManager);
+    }
+
+    void ChangeTheme(object value)
+    {
+        var url = NavigationManager.GetUriWithQueryParameter("theme", $"{value}");
+        NavigationManager.NavigateTo(url, true);
+    }
+}

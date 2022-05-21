@@ -10,4 +10,13 @@
       <PackageReference Include="Radzen.Blazor" Version="3.18.8" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Infrastructure\Pages\Error.cshtml" />
+      <AdditionalFiles Include="Infrastructure\Pages\Index.razor" />
+      <AdditionalFiles Include="Infrastructure\Pages\_Host.cshtml" />
+      <AdditionalFiles Include="Infrastructure\Pages\_Layout.cshtml" />
+      <AdditionalFiles Include="Infrastructure\Shared\MainLayout.razor" />
+      <AdditionalFiles Include="Infrastructure\Shared\NavMenu.razor" />
+    </ItemGroup>
+
 </Project>
