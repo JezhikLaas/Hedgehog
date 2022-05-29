@@ -50,8 +50,8 @@ steps:
     Dockerfile: Hedgehog.Persistence/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
     tags: |
-      hedgehog-persistence:$(Build.BuildId)
-      hedgehog-persistence:latest
+      $(Build.BuildId)
+      latest
 
 - task: Docker@2
   displayName: 'RestApi build and push'
@@ -62,8 +62,8 @@ steps:
     Dockerfile: Hedgehog.RestApi/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
     tags: |
-      hedgehog-restapi:$(Build.BuildId)
-      hedgehog-restapi:latest
+      $(Build.BuildId)
+      latest
     
 - task: Docker@2
   displayName: 'UI build and push'
@@ -74,8 +74,8 @@ steps:
     Dockerfile: Hedgehog.UI/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
     tags: |
-      hedgehog-ui:$(Build.BuildId)
-      hedgehog-ui:latest
+      $(Build.BuildId)
+      latest
     
 - task: Docker@2
   displayName: Logout of Docker Hub
