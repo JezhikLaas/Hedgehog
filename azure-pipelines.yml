@@ -40,4 +40,5 @@ steps:
   inputs:
     repository: $(persistenceImage)
     command: build
+    buildContext: .
     Dockerfile: Hedgehog.Persistence/Dockerfile
