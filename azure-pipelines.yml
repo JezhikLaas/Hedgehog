@@ -44,32 +44,38 @@ steps:
 - task: Docker@2
   displayName: 'Persistence build and push'
   inputs:
-    repository: jezhik/hedgehog
+    repository: jezhik/hedgehog-persistence
     command: buildAndPush
     buildContext: .
     Dockerfile: Hedgehog.Persistence/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
-    tags: 'hedgehog-persistence'
-    
+    tags:
+      - hedgehog-persistence:$(Build.BuildId)
+      - hedgehog-persistence:latest
+
 - task: Docker@2
   displayName: 'RestApi build and push'
   inputs:
-    repository: jezhik/hedgehog
+    repository: jezhik/hedgehog-restapi
     command: buildAndPush
     buildContext: .
     Dockerfile: Hedgehog.RestApi/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
-    tags: 'hedgehog-restapi'
+    tags:
+      - hedgehog-restapi:$(Build.BuildId)
+      - hedgehog-restapi:latest
     
 - task: Docker@2
   displayName: 'UI build and push'
   inputs:
-    repository: jezhik/hedgehog
+    repository: jezhik/hedgehog-ui
     command: buildAndPush
     buildContext: .
     Dockerfile: Hedgehog.UI/Dockerfile
     containerRegistry: 'jezhik-dockerhub'
-    tags: 'hedgehog-ui'
+    tags:
+      - hedgehog-ui:$(Build.BuildId)
+      - hedgehog-ui:latest
     
 - task: Docker@2
   displayName: Logout of Docker Hub
