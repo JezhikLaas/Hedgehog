@@ -33,3 +33,10 @@ steps:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+
+- task: Docker@2
+  displayName: 'Build Persistence image'
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: Hedgehog.Persistence/Dockerfile
