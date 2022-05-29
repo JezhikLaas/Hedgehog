@@ -19,3 +19,23 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - LOG_NAME=Persistence
     entrypoint: ["./wait-for-it.sh", "rabbitmq:5672", "--", "./Hedgehog.Persistence"]
+
+  restapi:
+    build:
+      context: .
+      dockerfile: Hedgehog.RestApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - LOG_NAME=RestApi
+    entrypoint: ["./wait-for-it.sh", "rabbitmq:5672", "--", "./Hedgehog.RestApi"]
+
+  ui:
+    build:
+      context: .
+      dockerfile: Hedgehog.UI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - LOG_NAME=UI
+    ports:
+      - "5012:80"
+    entrypoint: ["./wait-for-it.sh", "rabbitmq:5672", "--", "./Hedgehog.UI"]
